@@ -1,0 +1,17 @@
+{
+  "url": " https://the-internet.herokuapp.com/login",
+  "secureAreaUrl": "https://the-internet.herokuapp.com/secure",
+  "successMessage": "You logged into a secure area!",
+  "invalidUsernameErrorMessage": "Your username is invalid!",
+  "invalidPasswordErrorMessage": "Your password is invalid!",
+  "invalidUsers": [
+    {
+      "username": "user",
+      "password": "password"
+    },
+    {
+      "username": "invalid",
+      "password": "invalid"
+    }
+  ]
+}

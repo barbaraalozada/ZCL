@@ -1,0 +1,33 @@
+{
+  "name": "barbara.lozada",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "all": "npm run chrome && npm run firefox",
+    "chrome": "npx playwright test --project=chromium --headed",
+    "firefox": "npx playwright test --project=firefox --headed",
+    "clean.report.results": "rm -rf allure-results",
+    "report": "allure generate allure-results --clean -o allure-report && allure open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barbaraalozada/ZCL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/barbaraalozada/ZCL/issues"
+  },
+  "homepage": "https://github.com/barbaraalozada/ZCL#readme",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1",
+    "allure-playwright": "^3.4.2",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0"
+  }
+}
