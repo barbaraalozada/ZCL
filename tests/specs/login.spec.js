@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 import LoginPage from '../pages/LoginPage.js';
 import fs from 'fs';
 import SecureAreaPage from '../pages/SecureAreaPage.js';
-import * as allure from 'allure-playwright';
 
 const usersJsonPath = './data/data.json';
 const usersData = JSON.parse(fs.readFileSync(usersJsonPath));
@@ -23,7 +22,7 @@ test.describe('Login Page Test', () => {
     await login.goto(url);
   });
 
-  test('Login with valid data', async ({ page }) => {
+  test('Login with valid data', async () => {
     await login.setUsername(process.env.USERNAME);
     await login.setPassword(process.env.PASSWORD);
     await login.clickLoginButton();
@@ -32,14 +31,14 @@ test.describe('Login Page Test', () => {
   });
 
   for (const user of invalidUsers) {
-    test(`Login with valid username and invalid password: ${user.password}`, async ({ page }) => {
+    test(`Login with valid username and invalid password: ${user.password}`, async () => {
       await login.setUsername(process.env.USERNAME);
       await login.setPassword(user.password);
       await login.clickLoginButton();
       await expect(await login.getFlashMessage()).toContain(invalidPasswordErrorMessage);
     });
 
-    test(`Login with invalid username: ${user.username} and valid password`, async ({ page }) => {
+    test(`Login with invalid username: ${user.username} and valid password`, async () => {
       await login.setUsername(user.username);
       await login.setPassword(process.env.PASSWORD);
       await login.clickLoginButton();
@@ -47,19 +46,19 @@ test.describe('Login Page Test', () => {
     });
   }
 
-  test('Login with valid username and missing password', async ({ page }) => {
+  test('Login with valid username and missing password', async () => {
     await login.setUsername(process.env.USERNAME);
     await login.clickLoginButton();
     await expect(await login.getFlashMessage()).toContain(invalidPasswordErrorMessage);
   });
 
-  test('Login with missing username and valid password', async ({ page }) => {
+  test('Login with missing username and valid password', async () => {
     await login.setPassword(process.env.PASSWORD);
     await login.clickLoginButton();
     await expect(await login.getFlashMessage()).toContain(invalidUsernameErrorMessage);
   });
 
-  test('Login with missing username and missing password', async ({ page }) => {
+  test('Login with missing username and missing password', async () => {
     await login.clickLoginButton();
     await expect(await login.getFlashMessage()).toContain(invalidUsernameErrorMessage);
   });
