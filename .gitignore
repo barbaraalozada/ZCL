@@ -16,3 +16,7 @@ allure-report
 
 #Enviroment
 .env
+
+#Folders
+/output
+imageComparison/output
