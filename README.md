@@ -1,4 +1,6 @@
-# Zero Copy Labs Test — Part 1: Automation Script
+# Zero Copy Labs Test 
+---
+# Part 1: Automation Script
 
 This repository contains UI automated tests built with **Node.js**, **JavaScript**, **Playwright**, and **Allure Reports**.  
 This is a **test project**, not an application, and its purpose is to execute automated browser tests using the Page Object Model (POM).
@@ -33,8 +35,6 @@ ZCL/
 └── README.md
 ```
 
----
-
 ## 🔧 Requirements
 
 Before installing and running the tests, ensure you have:
@@ -49,8 +49,6 @@ Install Allure globally:
 ```bash
 npm install -g allure-commandline
 ```
-
----
 
 ## 📦 Installation
 
@@ -73,8 +71,6 @@ Install Playwright browsers:
 npx playwright install
 ```
 
----
-
 ## 🔧 Environment Variables
 
 Create a `.env` file from the example template:
@@ -91,8 +87,6 @@ PASSWORD=testPassword
 ```
 
 Your code loads these variables using **dotenv**.
-
----
 
 ## ▶️ Running Tests
 
@@ -113,8 +107,6 @@ Run Firefox only:
 ```bash
 npm run firefox
 ```
-
----
 
 ## 🧪 Allure Report
 
@@ -138,8 +130,6 @@ This will:
 - Output into `allure-report/`
 - Open the report in your browser
 
----
-
 ## 🧹 Linting (Optional)
 
 Check code style:
@@ -154,8 +144,6 @@ Auto-fix issues:
 npm run lint.fix
 ```
 
----
-
 ## 📚 Technologies Used
 
 - Playwright – UI automation  
@@ -165,9 +153,83 @@ npm run lint.fix
 - Allure Playwright – test reporting  
 - ESLint – code quality  
 
----
-
 ## 🙋 Support
 
 If you need help or want to report an issue:  
 👉 https://github.com/barbaraalozada/ZCL/issues
+
+---
+
+# Part 2: Spot the Differences
+This script compares two images and generates a visual diff image highlighting the differences between them using Resemble.js.
+
+It automatically handles:
+
+- Creating the output folder if it does not exist.
+- Validating that the input image files exist.
+- Handling errors clearly if reading images or saving the diff fails.
+
+This script is designed as a standalone, easy-to-use tool for visually highlighting differences between images.
+
+## 🔧 Requirements
+
+### ⚙️ Core Dependencies
+
+- Node.js v16+
+- npm
+  Libraries:
+```bash
+npm install resemblejs fs-extra
+```
+⚠️ ⚠️ Resemble.js requires the canvas library for Node.js support. Because canvas relies on native code, you must install system dependencies before running npm install canvas.
+
+### 🍎 macOS Instructions
+On macOS, use Homebrew to install the necessary dependencies (cairo, pango, etc.):
+```bash
+brew install pkg-config cairo pango libpng jpeg giflib librsvg
+npm install canvas
+```
+### 🌍 Other Operating Systems (Linux/Windows)
+For detailed instructions on installing the system dependencies required for Linux (e.g., Debian, Fedora) and Windows, please refer to the official node-canvas documentation:
+
+System Dependencies Guide: https://github.com/Automattic/node-canvas/wiki
+
+## 📁 Project Structure
+
+```
+ZCL/
+imageComparison/
+├─ images/              # Folder containing images to compare
+│   ├─ Image1.jpg
+│   └─ Image2.jpg
+├─ output/              # Folder where the diff image will be saved (auto-created)
+│   └─ diff.jpg
+├─ comments.txt         # Visual observation (Please, read it)
+└─ compare.js           # Main comparison script
+```
+
+## 💡 Usage
+
++ Place the images you want to compare inside the `images/` folder.
+
++ Update ```compare.js``` with the paths to your images and the desired output path:
+```js
+import { compareImages } from "./compareImages.js";
+
+compareImages(
+  "images/img1.png",
+  "images/img2.png",
+  "output/diff.png"
+);
+```
++ Run the script in the terminal:
+```bash
+npm run compare
+```
++ After running, the ```diff.png``` image will be generated in the `output/` folder, showing the visual differences between the two images.
+
+## 🔎 Manual execution
+
+The visual differences I found between the two images are documented in the `comments.txt` file.
+
+---
