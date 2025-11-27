@@ -218,7 +218,7 @@ npm run part2
 
 ## 🔎 Manual execution
 
-The visual differences I found between the two images are documented in the [Observations](imageComparison/Observations.md) file.
+The visual differences I found between the two images are documented in the [Observations](imageComparison/OBSERVATIONS.md) file.
 
 ---
 
