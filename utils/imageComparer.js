@@ -13,18 +13,25 @@ export async function compareImages (imagePath1, imagePath2, diffOutputPath) {
     const folder = path.dirname(diffOutputPath);
     fs.ensureDirSync(folder);
 
-    resemble(imagePath1).
-      compareTo(imagePath2).
-      onComplete(async function (data) {
-        try {
-          console.log(data);
-          const diffBuffer = data.getBuffer();
-          await fs.writeFile(diffOutputPath, diffBuffer);
-          console.log('Diff image saved at:', diffOutputPath);
-        } catch (err) {
-          console.error('Error while saving diff image:', err.message);
-        }
-      });
+    return new Promise((resolve, reject) => {
+      resemble(imagePath1).
+        compareTo(imagePath2).
+        onComplete(async function (data) {
+          try {
+            console.log(data);
+            const diffBuffer = data.getBuffer();
+            await fs.writeFile(diffOutputPath, diffBuffer);
+            resolve({
+              isSameDimensions: data.isSameDimensions,
+              misMatchPercentage: Number(data.misMatchPercentage),
+              diffBounds: data.diffBounds,
+              analysisTime: data.analysisTime
+            });
+          } catch (err) {
+            reject(err);
+          }
+        });
+    });
   } catch (err) {
     console.error('Image comparison error:', err.message);
   }

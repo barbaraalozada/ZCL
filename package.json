@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "all": "npm run chrome && npm run firefox",
-    "chrome": "npx playwright test --project=chromium --headed",
-    "firefox": "npx playwright test --project=firefox --headed",
+    "all": "npm run part1 && npm run part2 && npm run part3",
+    "part1": "npm run chrome && npm run firefox",
+    "chrome": "npx playwright test login.spec.js --project=chromium --headed",
+    "firefox": "npx playwright test login.spec.js --project=firefox --headed",
     "clean.report.results": "rm -rf allure-results",
     "report": "allure generate allure-results --clean -o allure-report && allure open",
     "lint": "npx eslint .",
     "lint.fix": "npx eslint . --fix",
-    "compare": "node ./imageComparison/compare.js"
+    "part2": "npx playwright test imageComparison.spec.js",
+    "part3": "npx playwright test api.spec.js"
   },
   "repository": {
     "type": "git",
