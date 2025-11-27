@@ -17,4 +17,4 @@ Following are my visual observations:
 - In "[Image2](/data/images/Image2.jpg)", the card has three buttons without padding, while in "[Image1](/data/images/Image1.jpg)", it has only one button.
 - The color of the buttons is slightly different; "[Image2](/data/images/Image2.jpg)" has lighter blue buttons than "[Image1](/data/images/Image1.jpg)".
 
-Link to go back to the [README](README.md) file.
+Link to go back to the [README](../README.md) file.
