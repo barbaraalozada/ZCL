@@ -1,13 +1,12 @@
 Part 2: Spot the Differences
 
 * Objective:
-Identify differences between these two images.
-
+   Identify differences between these two images.
 * Task:
-List all visual or functional differences that might affect testing outcomes or user experience.
-
+   List all visual or functional differences that might affect testing outcomes or user experience.
 * Result:
-Following are my visual observations:
+   Following are my visual observations:
+
 - In "Image1.jpg", the “My Accounts” title is bold, while in Image2, it is regular or thin.
 - "Image2.jpg" has a missing “c” in the “My Accounts” title.
 - "Image2.jpg" has a red subtitle “My Acounts,” and this title also has a missing letter “c”.

@@ -1,16 +1,14 @@
 import { test, expect } from '@playwright/test';
-import LoginPage from '../pages/LoginPage.js';
-import fs from 'fs';
-import SecureAreaPage from '../pages/SecureAreaPage.js';
+import LoginPage from '../../pages/LoginPage.js';
+import SecureAreaPage from '../../pages/SecureAreaPage.js';
+import data from '../../../data/login.json' with { type: 'json' };
 
-const usersJsonPath = './data/data.json';
-const usersData = JSON.parse(fs.readFileSync(usersJsonPath));
-const url = usersData.url;
-const secureAreaUrl = usersData.secureAreaUrl;
-const invalidUsers = usersData.invalidUsers;
-const successMessage = usersData.successMessage;
-const invalidUsernameErrorMessage = usersData.invalidUsernameErrorMessage;
-const invalidPasswordErrorMessage = usersData.invalidPasswordErrorMessage;
+const url = data.url;
+const secureAreaUrl = data.secureAreaUrl;
+const invalidUsers = data.invalidUsers;
+const successMessage = data.successMessage;
+const invalidUsernameErrorMessage = data.invalidUsernameErrorMessage;
+const invalidPasswordErrorMessage = data.invalidPasswordErrorMessage;
 
 test.describe('Login Page Test', () => {
   let login;
