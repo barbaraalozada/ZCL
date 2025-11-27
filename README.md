@@ -1,32 +1,42 @@
-# Zero Copy Labs Test 
+# Zero Copy Labs Test
+- This repository contains UI and API automated tests built with Node.js, JavaScript, Playwright, and Allure Reports. This is a test project, not an application, and its purpose is to execute automated browser tests using the Page Object Model (POM) as well as API tests for validating backend functionality.
 ---
-# Part 1: Automation Script
-
-This repository contains UI automated tests built with **Node.js**, **JavaScript**, **Playwright**, and **Allure Reports**.  
-This is a **test project**, not an application, and its purpose is to execute automated browser tests using the Page Object Model (POM).
 
 ## 📁 Project Structure
 
 ```
 ZCL/
 │
-├── allure-report/          # Generated HTML report (created after running "npm run report")
-├── allure-results/         # Raw Allure test result files (created automatically)
-├── data/                   # Optional data folder (if used for fixtures or test data)
+├── allure-report/                         # Generated HTML report (created after running "npm run report")
+├── allure-result/                         # Raw Allure test result files (created automatically)
+├── data/                                  # Test data folder
+│   └── images/                            # Folder containing images to compare
+│
+├── imageComparison/
+│   └── Observations.md                    # My observation of the image comparison task
+│
 ├── node_modules/
-├── test-results/           # Playwright test artifacts (screenshots, traces)
+├── output/                                # Folder where the diff image will be saved (auto-created)
+├── test-results/                          # Playwright test artifacts (screenshots, traces)
 │
 ├── tests/
-│   ├── pages/              # Page Object Model (POM) files
+│   ├── pages/                             # Page Object Model (POM) files
 │   │   ├── BasePage.js
 │   │   ├── LoginPage.js
 │   │   └── SecureAreaPage.js
-│   │
-│   └── specs/              # Test files
-│       └── login.spec.js
+│   
+│   └── specs/                             # Test files
+│   │   ├── api                            # Part 3: API Testing task
+│   │   │   └── api.spec.js
+│   │   │ 
+│   │   ├── ui                             # Part 1: Automation Script
+│   │   │   └── login.spec.js
+│   │   │
+│   │   ├── visual                         # Part 2: Spot the Differences
+│   │   │   └── imageComparison.spec.js
 │
-├── .env                    # Private environment variables (NOT committed)
-├── .env.example            # Template for environment variables (safe to commit)
+├── .env                                   # Private environment variables (NOT committed)
+├── .env.example                           # Template for environment variables (safe to commit)
 ├── .gitignore
 ├── eslint.config.mjs
 ├── jsconfig.json
@@ -34,6 +44,17 @@ ZCL/
 ├── playwright.config.js
 └── README.md
 ```
+## 📚 Technologies Used
+
+- Playwright – UI automation  
+- JavaScript (ES Modules)  
+- Node.js  
+- Dotenv – environment variable management  
+- Allure Playwright – test reporting  
+- ESLint – code quality  
+- Resemble.js – to handle image comparison  
+---
+# Part 1: Automation Script
 
 ## 🔧 Requirements
 
@@ -93,7 +114,7 @@ Your code loads these variables using **dotenv**.
 Run both browsers (Chromium + Firefox):
 
 ```bash
-npm run all
+npm run part1
 ```
 
 Run Chromium only:
@@ -144,20 +165,6 @@ Auto-fix issues:
 npm run lint.fix
 ```
 
-## 📚 Technologies Used
-
-- Playwright – UI automation  
-- JavaScript (ES Modules)  
-- Node.js  
-- Dotenv – environment variable management  
-- Allure Playwright – test reporting  
-- ESLint – code quality  
-
-## 🙋 Support
-
-If you need help or want to report an issue:  
-👉 https://github.com/barbaraalozada/ZCL/issues
-
 ---
 
 # Part 2: Spot the Differences
@@ -181,7 +188,7 @@ This script is designed as a standalone, easy-to-use tool for visually highlight
 ```bash
 npm install resemblejs fs-extra
 ```
-⚠️ ⚠️ Resemble.js requires the canvas library for Node.js support. Because canvas relies on native code, you must install system dependencies before running npm install canvas.
+⚠️ Resemble.js requires the canvas library for Node.js support. Because canvas relies on native code, you must install system dependencies before running npm install canvas.
 
 ### 🍎 macOS Instructions
 On macOS, use Homebrew to install the necessary dependencies (cairo, pango, etc.):
@@ -194,42 +201,52 @@ For detailed instructions on installing the system dependencies required for Lin
 
 System Dependencies Guide: https://github.com/Automattic/node-canvas/wiki
 
-## 📁 Project Structure
-
-```
-ZCL/
-imageComparison/
-├─ images/              # Folder containing images to compare
-│   ├─ Image1.jpg
-│   └─ Image2.jpg
-├─ output/              # Folder where the diff image will be saved (auto-created)
-│   └─ diff.jpg
-├─ comments.txt         # Visual observation (Please, read it)
-└─ compare.js           # Main comparison script
-```
-
 ## 💡 Usage
 
-+ Place the images you want to compare inside the `images/` folder.
++ Place the images you want to compare inside the `data/images/` folder.
 
-+ Update ```compare.js``` with the paths to your images and the desired output path:
++ Update `imageComparison.spec.js` with the paths to your images and the desired output path:
 ```js
-import { compareImages } from "./compareImages.js";
-
-compareImages(
-  "images/img1.png",
-  "images/img2.png",
-  "output/diff.png"
-);
+const img1 = 'data/images/Image1.jpg';
+const img2 = 'data/images/Image2.jpg';
 ```
 + Run the script in the terminal:
 ```bash
-npm run compare
+npm run part2
 ```
-+ After running, the ```diff.png``` image will be generated in the `output/` folder, showing the visual differences between the two images.
++ After running, the `diff.jpg` image will be generated in the `output/` folder, showing the visual differences between the two images.
 
 ## 🔎 Manual execution
 
-The visual differences I found between the two images are documented in the `comments.txt` file.
+The visual differences I found between the two images are documented in the [Observations](imageComparison/Observations.md) file.
 
 ---
+
+# Part 3: API Testing Task
+This section of the project contains automated API tests using Playwright’s request fixture.
+The goal is to validate the behavior of the API hosted at:
+```
+https://reqres.in/api
+```
+## ▶️ Running API test only
+
+To execute only the API project:
+```bash
+npm run part3
+```
+---
+# ▶️ Running and Generate Report of All Tests
+
+Run all tests:
+```bash
+npm run all
+```
+Clean test results:
+```bash
+npm run clean.report.results
+```
+Generate test report:
+
+```bash
+npm run report
+```
